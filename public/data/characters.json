@@ -1,0 +1,110 @@
+[
+  {
+    "id": "char_001",
+    "name": "失光审判官",
+    "rarity": "legend",
+    "faction": "白塔议会",
+    "role": "术士",
+    "position": "后排",
+    "description": "白塔议会中负责清理禁忌记录的审判者。"
+  },
+  {
+    "id": "char_002",
+    "name": "夜祷祭司",
+    "rarity": "epic",
+    "faction": "无名教团",
+    "role": "祭司",
+    "position": "后排",
+    "description": "以静默祷言维系队伍生机的神秘祭司。"
+  },
+  {
+    "id": "char_003",
+    "name": "灰烬持盾者",
+    "rarity": "elite",
+    "faction": "灰烬远征军",
+    "role": "守卫",
+    "position": "前排",
+    "description": "常年立于最前方，以盾与余烬守住阵线。"
+  },
+  {
+    "id": "char_004",
+    "name": "荒原猎手",
+    "rarity": "rare",
+    "faction": "边境流亡者",
+    "role": "射手",
+    "position": "后排",
+    "description": "善于追踪与远距狙杀的边境幸存者。"
+  },
+  {
+    "id": "char_005",
+    "name": "见习卫兵",
+    "rarity": "normal",
+    "faction": "边境流亡者",
+    "role": "守卫",
+    "position": "前排",
+    "description": "尚未经历真正大战的新兵，但仍然回应了召唤。"
+  },
+  {
+    "id": "char_006",
+    "name": "静默抄写员",
+    "rarity": "rare",
+    "faction": "白塔议会",
+    "role": "辅助",
+    "position": "后排",
+    "description": "负责记录与修订残卷的无声书写者。"
+  },
+  {
+    "id": "char_007",
+    "name": "裂印行刑者",
+    "rarity": "elite",
+    "faction": "白塔议会",
+    "role": "战士",
+    "position": "前排",
+    "description": "专门处决失控记录与叛逃者的重刃执行者。"
+  },
+  {
+    "id": "char_008",
+    "name": "边境医士",
+    "rarity": "rare",
+    "faction": "边境流亡者",
+    "role": "祭司",
+    "position": "后排",
+    "description": "在荒野与废墟之间救治幸存者的漂泊医者。"
+  },
+  {
+    "id": "char_009",
+    "name": "黑钟司祭",
+    "rarity": "epic",
+    "faction": "无名教团",
+    "role": "术士",
+    "position": "后排",
+    "description": "敲响黑钟时，连沉默也会被具现成武器。"
+  },
+  {
+    "id": "char_010",
+    "name": "灰域巡猎者",
+    "rarity": "elite",
+    "faction": "灰烬远征军",
+    "role": "刺客",
+    "position": "后排",
+    "description": "擅长在灰雾中锁定目标并完成快速处决。"
+  },
+  {
+    "id": "char_011",
+    "name": "封页守门人",
+    "rarity": "epic",
+    "faction": "白塔议会",
+    "role": "守卫",
+    "position": "前排",
+    "description": "守护禁忌档案室入口的沉默巨盾。"
+  },
+  {
+    "id": "char_012",
+    "name": "无光见证者",
+    "rarity": "legend",
+    "faction": "镜面异灵",
+    "role": "术士",
+    "position": "后排",
+    "description": "曾目睹失光之刻的异界存在，名字已被抹除。"
+  }
+]
