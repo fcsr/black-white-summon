@@ -3,22 +3,22 @@
     <div class="panel">
       <div class="panel__title">召唤之书</div>
       <div class="panel__subtitle">
-        首版先提供静态界面，后续接入真实抽卡逻辑与保底计数。
+        已接入常驻召唤。消耗召唤券进行单抽或十连，重复角色将自动转化为金币。
       </div>
 
       <div class="list">
         <div class="list-item">
           <div class="stat-row">
             <span class="muted">常驻召唤券</span>
-            <span>12</span>
+            <span>{{ gameStore.summon.tickets }}</span>
           </div>
           <div class="stat-row">
             <span class="muted">史诗保底进度</span>
-            <span>7 / 50</span>
+            <span>{{ gameStore.summon.pityEpic }} / 50</span>
           </div>
           <div class="stat-row">
             <span class="muted">传说保底进度</span>
-            <span>31 / 200</span>
+            <span>{{ gameStore.summon.pityLegend }} / 200</span>
           </div>
         </div>
       </div>
@@ -27,24 +27,60 @@
     <div class="panel">
       <div class="panel__title">召唤操作</div>
       <div class="grid-2">
-        <button class="button button--block">单次召唤</button>
-        <button class="button button--primary button--block">十连召唤</button>
+        <button class="button button--block" @click="handleSummon(1)">
+          单次召唤
+        </button>
+        <button class="button button--primary button--block" @click="handleSummon(10)">
+          十连召唤
+        </button>
       </div>
+    </div>
+
+    <div class="panel" v-if="message">
+      <div class="panel__title">召唤反馈</div>
+      <p>{{ message }}</p>
     </div>
 
     <div class="panel">
       <div class="panel__title">最近召唤记录</div>
       <div class="list">
-        <div class="list-item">
-          你翻开书页，召来了 <span class="rarity-rare">[稀有] 荒原猎手</span>
-        </div>
-        <div class="list-item">
-          书页间浮现古老誓词：<span class="rarity-epic">[史诗] 夜祷祭司</span>
-        </div>
-        <div class="list-item">
-          封印震颤，钟声响起：<span class="rarity-legend">[传说] 失光审判官</span>
+        <div
+          v-for="(log, index) in gameStore.summon.logs"
+          :key="index"
+          class="list-item"
+        >
+          {{ log }}
         </div>
       </div>
     </div>
+
+    <SummonResultModal
+      :visible="showResultModal"
+      :results="latestResults"
+      @close="showResultModal = false"
+    />
   </section>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { useGameStore } from '../stores/gameStore'
+import SummonResultModal from '../components/summon/SummonResultModal.vue'
+
+const gameStore = useGameStore()
+const message = ref('')
+const showResultModal = ref(false)
+const latestResults = ref([])
+
+function handleSummon(count) {
+  try {
+    const results = gameStore.performStandardSummon(count)
+    latestResults.value = results
+    showResultModal.value = true
+    message.value = `召唤成功，本次完成 ${count} 次召唤。`
+  } catch (error) {
+    console.error(error)
+    message.value = error.message || '召唤失败。'
+  }
+}
+</script>
