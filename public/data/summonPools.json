@@ -1,0 +1,17 @@
+{
+  "standard": {
+    "name": "常驻召唤",
+    "costPerDraw": 1,
+    "rarityRates": {
+      "legend": 0.02,
+      "epic": 0.1,
+      "elite": 0.2,
+      "rare": 0.28,
+      "normal": 0.4
+    },
+    "pity": {
+      "epic": 50,
+      "legend": 200
+    }
+  }
+}
