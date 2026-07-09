@@ -1,0 +1,52 @@
+:root {
+  --bg: #0f0f10;
+  --bg-elevated: #171719;
+  --bg-panel: #1d1d20;
+  --line: #34343a;
+  --line-strong: #4a4a52;
+  --text: #f3f3f3;
+  --text-soft: #b5b5bc;
+  --text-faint: #7d7d86;
+
+  --rarity-normal: #bfbfbf;
+  --rarity-rare: #6fa8dc;
+  --rarity-elite: #93c47d;
+  --rarity-epic: #c27ba0;
+  --rarity-legend: #e69138;
+  --rarity-myth: #ffd966;
+
+  --topbar-height: 56px;
+  --navbar-height: 72px;
+  --page-max-width: 720px;
+  --radius: 14px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+body {
+  background: linear-gradient(180deg, #090909 0%, #121214 100%);
+  color: var(--text);
+}
+
+.rarity-normal {
+  color: var(--rarity-normal);
+}
+
+.rarity-rare {
+  color: var(--rarity-rare);
+}
+
+.rarity-elite {
+  color: var(--rarity-elite);
+}
+
+.rarity-epic {
+  color: var(--rarity-epic);
+}
+
+.rarity-legend {
+  color: var(--rarity-legend);
+}
+
+.rarity-myth {
+  color: var(--rarity-myth);
+}
