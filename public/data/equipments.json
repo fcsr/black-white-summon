@@ -1,0 +1,112 @@
+[
+  {
+    "id": "eq_001",
+    "name": "守御头盔",
+    "slot": "helmet",
+    "set": "guard",
+    "rarity": "rare",
+    "mainStat": {
+      "type": "hp",
+      "value": 180
+    }
+  },
+  {
+    "id": "eq_002",
+    "name": "守御胸甲",
+    "slot": "armor",
+    "set": "guard",
+    "rarity": "elite",
+    "mainStat": {
+      "type": "def",
+      "value": 28
+    }
+  },
+  {
+    "id": "eq_003",
+    "name": "迅捷胫甲",
+    "slot": "boots",
+    "set": "speed",
+    "rarity": "epic",
+    "mainStat": {
+      "type": "spd",
+      "value": 16
+    }
+  },
+  {
+    "id": "eq_004",
+    "name": "锋刃长剑",
+    "slot": "weapon",
+    "set": "attack",
+    "rarity": "rare",
+    "mainStat": {
+      "type": "atk",
+      "value": 24
+    }
+  },
+  {
+    "id": "eq_005",
+    "name": "断章吊坠",
+    "slot": "accessory",
+    "set": "crit",
+    "rarity": "elite",
+    "mainStat": {
+      "type": "crit",
+      "value": 6
+    }
+  },
+  {
+    "id": "eq_006",
+    "name": "迅捷护手",
+    "slot": "gloves",
+    "set": "speed",
+    "rarity": "rare",
+    "mainStat": {
+      "type": "atk",
+      "value": 18
+    }
+  },
+  {
+    "id": "eq_007",
+    "name": "战痕胸甲",
+    "slot": "armor",
+    "set": "attack",
+    "rarity": "rare",
+    "mainStat": {
+      "type": "atk",
+      "value": 20
+    }
+  },
+  {
+    "id": "eq_008",
+    "name": "守望之靴",
+    "slot": "boots",
+    "set": "guard",
+    "rarity": "elite",
+    "mainStat": {
+      "type": "def",
+      "value": 22
+    }
+  },
+  {
+    "id": "eq_009",
+    "name": "猎影短弓",
+    "slot": "weapon",
+    "set": "crit",
+    "rarity": "epic",
+    "mainStat": {
+      "type": "atk",
+      "value": 35
+    }
+  },
+  {
+    "id": "eq_010",
+    "name": "迅捷冠环",
+    "slot": "helmet",
+    "set": "speed",
+    "rarity": "rare",
+    "mainStat": {
+      "type": "spd",
+      "value": 10
+    }
+  }
+]
