@@ -1,6 +1,6 @@
 export const SAVE_KEY = 'black_white_summon_save'
 
-export const GAME_VERSION = '0.0.4'
+export const GAME_VERSION = '0.0.6'
 
 export const DEFAULT_PLAYER = {
   name: '记录者',
@@ -11,7 +11,7 @@ export const DEFAULT_PLAYER = {
 
 export const DEFAULT_PROGRESS = {
   currentChapter: 1,
-  clearedStages: ['stage_1_1', 'stage_1_2', 'stage_1_3']
+  clearedStages: []
 }
 
 export const DEFAULT_TEAM = [
@@ -85,14 +85,10 @@ export const DEFAULT_SAVE_DATA = {
     equipments: []
   },
   summon: {
-    pityEpic: 7,
-    pityLegend: 31,
+    pityEpic: 0,
+    pityLegend: 0,
     tickets: 12,
-    logs: [
-      '你翻开书页，召来了 [稀有] 荒原猎手',
-      '书页间浮现古老誓词：[史诗] 夜祷祭司',
-      '封印震颤，钟声响起：[传说] 失光审判官'
-    ]
+    logs: []
   },
   settings: DEFAULT_SETTINGS
 }
@@ -122,4 +118,20 @@ export const DUPLICATE_GOLD_REWARD = {
   epic: 800,
   legend: 2000,
   myth: 5000
+}
+
+export const EQUIPMENT_SLOT_LABELS = {
+  weapon: '武器',
+  helmet: '头盔',
+  armor: '胸甲',
+  gloves: '护手',
+  boots: '靴子',
+  accessory: '饰品'
+}
+
+export const EQUIPMENT_SET_LABELS = {
+  attack: '攻击',
+  guard: '守御',
+  speed: '迅捷',
+  crit: '暴击'
 }
