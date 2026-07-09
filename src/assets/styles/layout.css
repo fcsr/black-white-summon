@@ -262,3 +262,26 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+  padding: 16px;
+}
+
+.modal-panel {
+  width: 100%;
+  max-width: 620px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #171719;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
