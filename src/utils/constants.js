@@ -1,6 +1,6 @@
 export const SAVE_KEY = 'black_white_summon_save'
 
-export const GAME_VERSION = '0.0.2'
+export const GAME_VERSION = '0.0.3'
 
 export const DEFAULT_PLAYER = {
   name: '记录者',
@@ -22,7 +22,8 @@ export const DEFAULT_TEAM = [
     level: 60,
     faction: '白塔议会',
     role: '术士',
-    position: '后排'
+    position: '后排',
+    description: '白塔议会中负责清理禁忌记录的审判者。'
   },
   {
     id: 'char_002',
@@ -31,7 +32,8 @@ export const DEFAULT_TEAM = [
     level: 52,
     faction: '无名教团',
     role: '祭司',
-    position: '后排'
+    position: '后排',
+    description: '以静默祷言维系队伍生机的神秘祭司。'
   },
   {
     id: 'char_003',
@@ -40,7 +42,8 @@ export const DEFAULT_TEAM = [
     level: 45,
     faction: '灰烬远征军',
     role: '守卫',
-    position: '前排'
+    position: '前排',
+    description: '常年立于最前方，以盾与余烬守住阵线。'
   },
   {
     id: 'char_004',
@@ -49,7 +52,8 @@ export const DEFAULT_TEAM = [
     level: 38,
     faction: '边境流亡者',
     role: '射手',
-    position: '后排'
+    position: '后排',
+    description: '善于追踪与远距狙杀的边境幸存者。'
   },
   {
     id: 'char_005',
@@ -58,7 +62,8 @@ export const DEFAULT_TEAM = [
     level: 24,
     faction: '边境流亡者',
     role: '守卫',
-    position: '前排'
+    position: '前排',
+    description: '尚未经历真正大战的新兵，但仍然回应了召唤。'
   }
 ]
 
