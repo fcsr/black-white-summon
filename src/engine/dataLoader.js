@@ -19,3 +19,7 @@ export async function loadSummonPools() {
 export async function loadStages() {
   return await loadJson('./data/stages.json', '关卡数据加载失败')
 }
+
+export async function loadEquipments() {
+  return await loadJson('./data/equipments.json', '装备数据加载失败')
+}
