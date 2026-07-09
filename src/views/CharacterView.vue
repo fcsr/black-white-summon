@@ -3,49 +3,52 @@
     <div class="panel">
       <div class="panel__title">角色名录</div>
       <div class="panel__subtitle">
-        这里将用于展示玩家已拥有角色、详情、升级与编队。
+        当前页面已接入真实角色数据。点击角色卡片可查看详情。
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel__title">编队概览</div>
+
+      <div class="stat-row">
+        <span class="muted">已拥有角色数</span>
+        <span>{{ gameStore.roster.ownedCharacters.length }}</span>
+      </div>
+      <div class="stat-row">
+        <span class="muted">当前上阵人数</span>
+        <span>{{ gameStore.currentTeamCharacters.length }}</span>
+      </div>
+      <div class="stat-row">
+        <span class="muted">当前队伍战力</span>
+        <span>{{ gameStore.currentPower }}</span>
       </div>
     </div>
 
     <div class="panel">
       <div class="panel__title">已拥有角色</div>
-      <div class="list">
-        <div class="list-item">
-          <div class="stat-row">
-            <span class="rarity-legend">[传说] 失光审判官</span>
-            <span>Lv. 60</span>
-          </div>
-          <div class="tag-row">
-            <span class="tag">白塔议会</span>
-            <span class="tag">术士</span>
-            <span class="tag">群体输出</span>
-          </div>
-        </div>
 
-        <div class="list-item">
-          <div class="stat-row">
-            <span class="rarity-epic">[史诗] 夜祷祭司</span>
-            <span>Lv. 52</span>
-          </div>
-          <div class="tag-row">
-            <span class="tag">无名教团</span>
-            <span class="tag">祭司</span>
-            <span class="tag">治疗辅助</span>
-          </div>
-        </div>
-
-        <div class="list-item">
-          <div class="stat-row">
-            <span class="rarity-elite">[卓越] 灰烬持盾者</span>
-            <span>Lv. 45</span>
-          </div>
-          <div class="tag-row">
-            <span class="tag">灰烬远征军</span>
-            <span class="tag">守卫</span>
-            <span class="tag">承伤反击</span>
-          </div>
-        </div>
+      <div class="character-list">
+        <CharacterCard
+          v-for="character in gameStore.roster.ownedCharacters"
+          :key="character.id"
+          :character="character"
+        />
       </div>
     </div>
   </section>
 </template>
+
+<script setup>
+import { useGameStore } from '../stores/gameStore'
+import CharacterCard from '../components/character/CharacterCard.vue'
+
+const gameStore = useGameStore()
+</script>
+
+<style scoped>
+.character-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+</style>
