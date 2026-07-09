@@ -9,7 +9,7 @@ import {
   importSaveFromText
 } from '../engine/saveManager'
 import { GAME_VERSION, DUPLICATE_GOLD_REWARD, RARITY_LABELS } from '../utils/constants'
-import { loadCharacters, loadSummonPools } from '../engine/dataLoader'
+import { loadCharacters, loadSummonPools, loadStages } from '../engine/dataLoader'
 import { performSummon } from '../engine/summonEngine'
 
 export const useGameStore = defineStore('game', {
@@ -109,12 +109,7 @@ export const useGameStore = defineStore('game', {
         const [characters, summonPools, stages] = await Promise.all([
           loadCharacters(),
           loadSummonPools(),
-          fetch('./data/stages.json').then((response) => {
-            if (!response.ok) {
-              throw new Error('关卡数据加载失败')
-            }
-            return response.json()
-          })
+          loadStages()
         ])
 
         this.databases.characters = characters
