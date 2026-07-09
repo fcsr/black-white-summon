@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import StoryView from '../views/StoryView.vue'
 import SummonView from '../views/SummonView.vue'
 import CharacterView from '../views/CharacterView.vue'
+import CharacterDetailView from '../views/CharacterDetailView.vue'
 import EquipmentView from '../views/EquipmentView.vue'
 import CodexView from '../views/CodexView.vue'
 import BattleView from '../views/BattleView.vue'
@@ -31,6 +32,11 @@ const router = createRouter({
       path: '/characters',
       name: 'characters',
       component: CharacterView
+    },
+    {
+      path: '/character/:id',
+      name: 'character-detail',
+      component: CharacterDetailView
     },
     {
       path: '/equipment',
