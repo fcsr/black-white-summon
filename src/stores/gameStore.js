@@ -47,7 +47,8 @@ export const useGameStore = defineStore('game', {
     },
     databases: {
       characters: [],
-      summonPools: {}
+      summonPools: {},
+      stages: []
     }
   }),
 
@@ -74,6 +75,12 @@ export const useGameStore = defineStore('game', {
           state.roster.ownedCharacters.find((character) => character.id === id)
         )
         .filter(Boolean)
+    },
+
+    chapterStages(state) {
+      return state.databases.stages.filter(
+        (stage) => stage.chapter === state.progress.currentChapter
+      )
     }
   },
 
@@ -99,13 +106,20 @@ export const useGameStore = defineStore('game', {
       }
 
       try {
-        const [characters, summonPools] = await Promise.all([
+        const [characters, summonPools, stages] = await Promise.all([
           loadCharacters(),
-          loadSummonPools()
+          loadSummonPools(),
+          fetch('./data/stages.json').then((response) => {
+            if (!response.ok) {
+              throw new Error('关卡数据加载失败')
+            }
+            return response.json()
+          })
         ])
 
         this.databases.characters = characters
         this.databases.summonPools = summonPools
+        this.databases.stages = stages
         this.staticDataLoaded = true
       } catch (error) {
         console.error('静态数据加载失败：', error)
@@ -218,6 +232,43 @@ export const useGameStore = defineStore('game', {
       this.autoSave()
 
       return summonResult.results
+    },
+
+    getStageById(stageId) {
+      return this.databases.stages.find((stage) => stage.id === stageId) || null
+    },
+
+    isStageCleared(stageId) {
+      return this.progress.clearedStages.includes(stageId)
+    },
+
+    completeStage(stage) {
+      const alreadyCleared = this.isStageCleared(stage.id)
+
+      this.player.gold += stage.rewards.gold || 0
+      this.player.gem += stage.rewards.gem || 0
+
+      if (!alreadyCleared) {
+        this.progress.clearedStages.push(stage.id)
+        this.player.gold += stage.firstClearRewards?.gold || 0
+        this.player.gem += stage.firstClearRewards?.gem || 0
+
+        if (stage.chapter === this.progress.currentChapter) {
+          const chapterStageIds = this.databases.stages
+            .filter((item) => item.chapter === stage.chapter)
+            .map((item) => item.id)
+
+          const allCleared = chapterStageIds.every((id) =>
+            this.progress.clearedStages.includes(id)
+          )
+
+          if (allCleared) {
+            this.progress.currentChapter += 1
+          }
+        }
+      }
+
+      this.autoSave()
     },
 
     exportJsonFile() {
