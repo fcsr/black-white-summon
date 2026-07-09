@@ -3,51 +3,94 @@
     <div class="panel">
       <div class="panel__title">主线战役</div>
       <div class="panel__subtitle">
-        先用静态章节占位，后续接入关卡数据和战斗系统。
+        当前章节：{{ gameStore.currentChapterName }}
       </div>
 
-      <div class="list">
-        <div class="list-item">
-          <div class="stat-row">
-            <span>第一章 · 失色边境</span>
-            <span class="muted">进度 3 / 8</span>
-          </div>
-          <p class="muted">边境的哨站已沉入灰雾，第一批无名者正在集结。</p>
-        </div>
-
-        <div class="list-item">
-          <div class="stat-row">
-            <span>第二章 · 白塔余烬</span>
-            <span class="muted">未解锁</span>
-          </div>
-          <p class="muted">白塔议会的残卷正在失真，更多秘密等待记录。</p>
-        </div>
+      <div class="stat-row">
+        <span class="muted">已通关关卡数</span>
+        <span>{{ gameStore.progress.clearedStages.length }}</span>
+      </div>
+      <div class="stat-row">
+        <span class="muted">当前体力</span>
+        <span>{{ gameStore.player.energy }}</span>
       </div>
     </div>
 
     <div class="panel">
-      <div class="panel__title">关卡入口示例</div>
-      <div class="grid-2">
-        <RouterLink to="/battle" class="action-card">
-          <div class="action-card__title">1-1 失色哨站</div>
-          <div class="action-card__desc">推荐战力 500</div>
-        </RouterLink>
+      <div class="panel__title">章节关卡</div>
 
-        <RouterLink to="/battle" class="action-card">
-          <div class="action-card__title">1-2 灰雾道路</div>
-          <div class="action-card__desc">推荐战力 650</div>
-        </RouterLink>
+      <div v-if="gameStore.chapterStages.length > 0" class="list">
+        <div
+          v-for="stage in gameStore.chapterStages"
+          :key="stage.id"
+          class="list-item"
+        >
+          <div class="stat-row">
+            <span>{{ stage.name }}</span>
+            <span>{{ gameStore.isStageCleared(stage.id) ? '已通关' : '未通关' }}</span>
+          </div>
 
-        <RouterLink to="/battle" class="action-card">
-          <div class="action-card__title">1-3 无名营地</div>
-          <div class="action-card__desc">推荐战力 800</div>
-        </RouterLink>
+          <div class="stat-row">
+            <span class="muted">推荐战力</span>
+            <span>{{ stage.recommendedPower }}</span>
+          </div>
 
-        <RouterLink to="/battle" class="action-card">
-          <div class="action-card__title">1-4 边境裂口</div>
-          <div class="action-card__desc">推荐战力 1000</div>
-        </RouterLink>
+          <div class="stat-row">
+            <span class="muted">消耗体力</span>
+            <span>{{ stage.energyCost }}</span>
+          </div>
+
+          <div class="stat-row">
+            <span class="muted">常规奖励</span>
+            <span>金币 {{ stage.rewards.gold }} / 辉石 {{ stage.rewards.gem }}</span>
+          </div>
+
+          <div class="stat-row">
+            <span class="muted">首通奖励</span>
+            <span>金币 {{ stage.firstClearRewards.gold }} / 辉石 {{ stage.firstClearRewards.gem }}</span>
+          </div>
+
+          <div style="margin-top: 12px;">
+            <button class="button button--primary button--block" @click="enterStage(stage.id)">
+              进入战斗
+            </button>
+          </div>
+        </div>
       </div>
+
+      <div v-else class="muted">
+        当前章节暂无可用关卡数据。
+      </div>
+    </div>
+
+    <div class="panel" v-if="message">
+      <div class="panel__title">提示</div>
+      <p>{{ message }}</p>
     </div>
   </section>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useGameStore } from '../stores/gameStore'
+import { useBattleStore } from '../stores/battleStore'
+
+const router = useRouter()
+const gameStore = useGameStore()
+const battleStore = useBattleStore()
+const message = ref('')
+
+function enterStage(stageId) {
+  const stage = gameStore.getStageById(stageId)
+
+  if (!stage) {
+    message.value = '关卡不存在。'
+    return
+  }
+
+  battleStore.setStage(stage)
+  message.value = `已选择关卡：${stage.name}`
+  router.push('/battle')
+}
+</script>
