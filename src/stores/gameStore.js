@@ -137,6 +137,10 @@ export const useGameStore = defineStore('game', {
       this.autoSave()
     },
 
+    getCharacterById(id) {
+      return this.roster.ownedCharacters.find((character) => character.id === id) || null
+    },
+
     exportJsonFile() {
       exportSaveAsJson(this.getSaveData())
     },
