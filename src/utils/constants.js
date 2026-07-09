@@ -1,6 +1,6 @@
 export const SAVE_KEY = 'black_white_summon_save'
 
-export const GAME_VERSION = '0.0.3'
+export const GAME_VERSION = '0.0.4'
 
 export const DEFAULT_PLAYER = {
   name: '记录者',
@@ -113,4 +113,13 @@ export const RARITY_CLASS_MAP = {
   epic: 'rarity-epic',
   legend: 'rarity-legend',
   myth: 'rarity-myth'
+}
+
+export const DUPLICATE_GOLD_REWARD = {
+  normal: 80,
+  rare: 150,
+  elite: 300,
+  epic: 800,
+  legend: 2000,
+  myth: 5000
 }
