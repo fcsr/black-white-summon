@@ -1,0 +1,166 @@
+[
+  {
+    "id": "stage_1_1",
+    "chapter": 1,
+    "name": "失色哨站",
+    "recommendedPower": 500,
+    "energyCost": 5,
+    "enemyTeam": [
+      {
+        "id": "enemy_001",
+        "name": "无名行尸",
+        "rarity": "normal",
+        "role": "战士",
+        "position": "前排",
+        "level": 8
+      },
+      {
+        "id": "enemy_002",
+        "name": "枯井侍从",
+        "rarity": "normal",
+        "role": "辅助",
+        "position": "后排",
+        "level": 7
+      },
+      {
+        "id": "enemy_003",
+        "name": "荒骨屠夫",
+        "rarity": "rare",
+        "role": "战士",
+        "position": "前排",
+        "level": 9
+      }
+    ],
+    "rewards": {
+      "gold": 120,
+      "gem": 10
+    },
+    "firstClearRewards": {
+      "gold": 100,
+      "gem": 20
+    }
+  },
+  {
+    "id": "stage_1_2",
+    "chapter": 1,
+    "name": "灰雾道路",
+    "recommendedPower": 650,
+    "energyCost": 5,
+    "enemyTeam": [
+      {
+        "id": "enemy_004",
+        "name": "断声巡犬",
+        "rarity": "rare",
+        "role": "刺客",
+        "position": "前排",
+        "level": 10
+      },
+      {
+        "id": "enemy_005",
+        "name": "灰尘侍从",
+        "rarity": "normal",
+        "role": "辅助",
+        "position": "后排",
+        "level": 9
+      },
+      {
+        "id": "enemy_006",
+        "name": "裂齿暴民",
+        "rarity": "rare",
+        "role": "战士",
+        "position": "前排",
+        "level": 11
+      }
+    ],
+    "rewards": {
+      "gold": 140,
+      "gem": 10
+    },
+    "firstClearRewards": {
+      "gold": 120,
+      "gem": 20
+    }
+  },
+  {
+    "id": "stage_1_3",
+    "chapter": 1,
+    "name": "无名营地",
+    "recommendedPower": 800,
+    "energyCost": 6,
+    "enemyTeam": [
+      {
+        "id": "enemy_007",
+        "name": "灰印祈祷者",
+        "rarity": "elite",
+        "role": "术士",
+        "position": "后排",
+        "level": 13
+      },
+      {
+        "id": "enemy_008",
+        "name": "荒骨屠夫",
+        "rarity": "rare",
+        "role": "战士",
+        "position": "前排",
+        "level": 12
+      },
+      {
+        "id": "enemy_009",
+        "name": "碎面拾荒人",
+        "rarity": "rare",
+        "role": "射手",
+        "position": "后排",
+        "level": 12
+      }
+    ],
+    "rewards": {
+      "gold": 170,
+      "gem": 15
+    },
+    "firstClearRewards": {
+      "gold": 150,
+      "gem": 25
+    }
+  },
+  {
+    "id": "stage_1_4",
+    "chapter": 1,
+    "name": "边境裂口",
+    "recommendedPower": 1000,
+    "energyCost": 6,
+    "enemyTeam": [
+      {
+        "id": "enemy_010",
+        "name": "黑雾祭兵",
+        "rarity": "elite",
+        "role": "术士",
+        "position": "后排",
+        "level": 15
+      },
+      {
+        "id": "enemy_011",
+        "name": "裂颅执斧者",
+        "rarity": "elite",
+        "role": "战士",
+        "position": "前排",
+        "level": 15
+      },
+      {
+        "id": "enemy_012",
+        "name": "沉默吞光者",
+        "rarity": "epic",
+        "role": "术士",
+        "position": "后排",
+        "level": 16
+      }
+    ],
+    "rewards": {
+      "gold": 220,
+      "gem": 20
+    },
+    "firstClearRewards": {
+      "gold": 180,
+      "gem": 30
+    }
+  }
+]
