@@ -1,22 +1,26 @@
 import { defineStore } from 'pinia'
 import { runBattle } from '../engine/battleEngine'
 import { useGameStore } from './gameStore'
+import { rollBattleEquipments } from '../engine/equipmentEngine'
 
 export const useBattleStore = defineStore('battle', {
   state: () => ({
     currentStage: null,
-    battleResult: null
+    battleResult: null,
+    latestDrops: []
   }),
 
   actions: {
     setStage(stage) {
       this.currentStage = stage
       this.battleResult = null
+      this.latestDrops = []
     },
 
     clearBattle() {
       this.currentStage = null
       this.battleResult = null
+      this.latestDrops = []
     },
 
     startBattle() {
@@ -38,9 +42,15 @@ export const useBattleStore = defineStore('battle', {
       )
 
       this.battleResult = result
+      this.latestDrops = []
 
       if (result.winner === 'player') {
         gameStore.completeStage(this.currentStage)
+
+        const dropCount = Math.random() < 0.7 ? 1 : 2
+        const drops = rollBattleEquipments(gameStore.databases.equipments, dropCount)
+        this.latestDrops = drops
+        gameStore.addEquipments(drops)
       }
 
       gameStore.autoSave()
