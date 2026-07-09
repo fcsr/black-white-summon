@@ -8,11 +8,14 @@ import {
   exportSaveAsText,
   importSaveFromText
 } from '../engine/saveManager'
-import { GAME_VERSION } from '../utils/constants'
+import { GAME_VERSION, DUPLICATE_GOLD_REWARD, RARITY_LABELS } from '../utils/constants'
+import { loadCharacters, loadSummonPools } from '../engine/dataLoader'
+import { performSummon } from '../engine/summonEngine'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
     initialized: false,
+    staticDataLoaded: false,
     version: GAME_VERSION,
     player: {
       name: '',
@@ -41,6 +44,10 @@ export const useGameStore = defineStore('game', {
     settings: {
       autoSave: true,
       textSpeed: 1
+    },
+    databases: {
+      characters: [],
+      summonPools: {}
     }
   }),
 
@@ -71,7 +78,7 @@ export const useGameStore = defineStore('game', {
   },
 
   actions: {
-    initializeGame() {
+    async initializeGame() {
       const loaded = loadSaveData()
 
       if (loaded) {
@@ -82,7 +89,27 @@ export const useGameStore = defineStore('game', {
         saveGameData(this.getSaveData())
       }
 
+      await this.loadStaticData()
       this.initialized = true
+    },
+
+    async loadStaticData() {
+      if (this.staticDataLoaded) {
+        return
+      }
+
+      try {
+        const [characters, summonPools] = await Promise.all([
+          loadCharacters(),
+          loadSummonPools()
+        ])
+
+        this.databases.characters = characters
+        this.databases.summonPools = summonPools
+        this.staticDataLoaded = true
+      } catch (error) {
+        console.error('静态数据加载失败：', error)
+      }
     },
 
     applySaveData(data) {
@@ -139,6 +166,58 @@ export const useGameStore = defineStore('game', {
 
     getCharacterById(id) {
       return this.roster.ownedCharacters.find((character) => character.id === id) || null
+    },
+
+    addCharacterToRoster(character) {
+      this.roster.ownedCharacters.push(character)
+    },
+
+    addSummonLog(text) {
+      this.summon.logs.unshift(text)
+      this.summon.logs = this.summon.logs.slice(0, 20)
+    },
+
+    performStandardSummon(drawCount = 1) {
+      if (!this.staticDataLoaded) {
+        throw new Error('静态数据尚未加载完成')
+      }
+
+      const pool = this.databases.summonPools.standard
+      const totalCost = drawCount * pool.costPerDraw
+
+      if (this.summon.tickets < totalCost) {
+        throw new Error('召唤券不足')
+      }
+
+      const summonResult = performSummon({
+        drawCount,
+        roster: this.roster.ownedCharacters,
+        summonState: this.summon,
+        poolConfig: pool,
+        characterTemplates: this.databases.characters
+      })
+
+      this.summon.tickets -= totalCost
+      this.summon.pityEpic = summonResult.pityEpic
+      this.summon.pityLegend = summonResult.pityLegend
+
+      summonResult.results.forEach((entry) => {
+        const rarityLabel = RARITY_LABELS[entry.template.rarity] || '未知'
+        const logText = `你召来了 [${rarityLabel}] ${entry.template.name}`
+
+        if (entry.isDuplicate) {
+          const goldReward = DUPLICATE_GOLD_REWARD[entry.template.rarity] || 0
+          this.player.gold += goldReward
+          this.addSummonLog(`${logText}（重复，转化为 ${goldReward} 金币）`)
+        } else {
+          this.addCharacterToRoster(entry.ownedCharacter)
+          this.addSummonLog(logText)
+        }
+      })
+
+      this.autoSave()
+
+      return summonResult.results
     },
 
     exportJsonFile() {
