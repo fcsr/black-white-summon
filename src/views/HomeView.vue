@@ -10,15 +10,15 @@
         <div class="list-item">
           <div class="stat-row">
             <span class="muted">玩家身份</span>
-            <span>记录者</span>
+            <span>{{ gameStore.player.name }}</span>
           </div>
           <div class="stat-row">
             <span class="muted">当前章节</span>
-            <span>第一章 · 失色边境</span>
+            <span>{{ gameStore.currentChapterName }}</span>
           </div>
           <div class="stat-row">
             <span class="muted">当前战力</span>
-            <span>1320</span>
+            <span>{{ gameStore.currentPower }}</span>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
 
         <RouterLink to="/settings" class="action-card">
           <div class="action-card__title">设置与存档</div>
-          <div class="action-card__desc">后续将在这里管理导出、导入与清档。</div>
+          <div class="action-card__desc">管理本地保存、导出、导入与清档。</div>
         </RouterLink>
       </div>
     </div>
@@ -62,12 +62,30 @@
     <div class="panel">
       <div class="panel__title">当前队伍</div>
       <div class="tag-row">
-        <span class="tag rarity-epic">[史诗] 夜祷祭司</span>
-        <span class="tag rarity-legend">[传说] 失光审判官</span>
-        <span class="tag rarity-elite">[卓越] 灰烬持盾者</span>
-        <span class="tag rarity-rare">[稀有] 荒原猎手</span>
-        <span class="tag rarity-normal">[普通] 见习卫兵</span>
+        <span
+          v-for="character in gameStore.currentTeamCharacters"
+          :key="character.id"
+          class="tag"
+          :class="getRarityClass(character.rarity)"
+        >
+          [{{ getRarityLabel(character.rarity) }}] {{ character.name }}
+        </span>
       </div>
     </div>
   </section>
 </template>
+
+<script setup>
+import { useGameStore } from '../stores/gameStore'
+import { RARITY_LABELS, RARITY_CLASS_MAP } from '../utils/constants'
+
+const gameStore = useGameStore()
+
+function getRarityLabel(rarity) {
+  return RARITY_LABELS[rarity] || '未知'
+}
+
+function getRarityClass(rarity) {
+  return RARITY_CLASS_MAP[rarity] || ''
+}
+</script>
